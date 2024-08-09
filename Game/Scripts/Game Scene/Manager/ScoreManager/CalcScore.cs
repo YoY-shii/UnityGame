@@ -16,7 +16,6 @@ public class CalcScore : MonoBehaviour
 
     void Start()
     {
-        //TotalScore = 0;
         KilledCount = 0;
         DeathCount = 0;
         isAliveBoss = true;
@@ -44,11 +43,16 @@ public class CalcScore : MonoBehaviour
     /// </summary>
     public void GetScore(IStatus status, IHaveScore score)
     {
-        //2体以上まとめて倒すとスコアとカウントがバグったのでIsAliveで判定後にカウントする方式に変更
+        //2体以上まとめて倒すとtotalScoreとKilledCountがバグったのでIsAliveで判定後にカウントする方式に変更
         if (!status.IsAlive)
         {
             totalScore += score.Score;
             KilledCount++;
+        }
+
+        if (totalScore <= 0)
+        {
+            totalScore = 0;
         }
 
         totalScoreText.text = "Score " + totalScore.ToString();
@@ -57,18 +61,18 @@ public class CalcScore : MonoBehaviour
     public int ResultScore()
     {
         const int PENALTYSCORE = 5000;
-        totalScore = totalScore + Player.Instance.Hp * 100 - DeathCount * PENALTYSCORE;
+        var finallScore = totalScore + Player.Instance.Hp * 100 - DeathCount * PENALTYSCORE;
 
-        if (totalScore <= 0)
+        if (finallScore <= 0)
         {
-            totalScore = 0;
+            finallScore = 0;
         }
 
-        return totalScore;
+        return finallScore;
     }
 }
 
-//ICheckAliveインターフェースで下記メソッドを実装するもnullになるのでどのようなメソッドを書いたかの記録だけ
+//ICheckAliveインターフェースで下記メソッドを実装するもnullになるのでどのようなメソッドを書いたかの記録
 //public void CheckAlivePlayer(Player player)
 //{
 //    if (!player.IsAlive)
