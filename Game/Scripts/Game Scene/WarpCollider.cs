@@ -10,7 +10,7 @@ public class WarpCollider : MonoBehaviour
     float terrainZ = 0;
 
     //Status
-    int damage = 50;
+    int damage = 10;
 
     private void OnTriggerEnter(Collider other)
     {

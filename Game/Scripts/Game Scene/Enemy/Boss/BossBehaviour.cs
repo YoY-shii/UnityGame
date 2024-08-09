@@ -1,8 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.AI;
-using UnityEngine.SceneManagement;
 
 public class BossBehaviour : MonoBehaviour
 {
@@ -18,7 +16,7 @@ public class BossBehaviour : MonoBehaviour
 
     //Cache
     Animator animator;
-    NavMeshAgent nav;
+    UnityEngine.AI.NavMeshAgent nav;
     Transform transformCache;
     WaitForSeconds waitForSecondsCache;
     WaitForSeconds waitForSecondsCacheAttack;
@@ -26,18 +24,24 @@ public class BossBehaviour : MonoBehaviour
     readonly float intervalAttack = 0.5f;
     int magicAttackCache;
 
-    void Start()
+    private void Awake()
     {
-        TryGetComponent(out statusInterface);
         TryGetComponent(out animator);
         TryGetComponent(out nav);
-        transformCache = this.transform;
-        magicAttackCache = Animator.StringToHash("MagicAttack");
+    }
 
+    //statusInterfaceがnullになるため、IEnumerator Start()に変更
+    //Awakeでも失敗する
+    IEnumerator Start()
+    {
+        //↓必ず使用すること、statusInterfaceがnullになる
+        yield return null;
+
+        TryGetComponent(out statusInterface);
+        transformCache = this.transform;
         waitForSecondsCache = new WaitForSeconds(interval);
         waitForSecondsCacheAttack = new WaitForSeconds(intervalAttack);
-
-        StartCoroutine(Attack());
+        magicAttackCache = Animator.StringToHash("MagicAttack");
 
         //ランダムに出現
         transformCache.position = new Vector3(
@@ -45,6 +49,8 @@ public class BossBehaviour : MonoBehaviour
             terrainY,
             Random.Range(-terrainZ, terrainZ)
             );
+
+        yield return Attack();
     }
 
     IEnumerator Attack()

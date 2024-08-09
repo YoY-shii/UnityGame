@@ -27,11 +27,15 @@ public class Movement : MonoBehaviour
     int damagedTagCache;
     int isDeathTagCache;
 
+    private void Awake()
+    {
+        TryGetComponent(out detectSlope);
+        TryGetComponent(out animator);
+    }
+
     void Start()
     {
         currentSpeed = groundSpeed;
-        TryGetComponent(out detectSlope);
-        TryGetComponent(out animator);
         transformCameraCache = Camera.main.transform;
         transformCache = this.transform;
         moveSpeedCache = Animator.StringToHash("MoveSpeed");

@@ -6,14 +6,16 @@ using UnityEngine;
 public class ReferenceDistance : MonoBehaviour
 {
     [SerializeField] Transform transformCache;
+    [SerializeField] Transform transformPlayerCache;
 
-    void Start()
+    void Awake()
     {
         transformCache = this.transform;
+        transformPlayerCache = Player.Instance.transform;
     }
 
     public float CalcDistance()
     {
-        return Vector3.SqrMagnitude(transformCache.position - Player.Instance.transform.position);
+        return Vector3.SqrMagnitude(transformCache.position - transformPlayerCache.position);
     }
 }

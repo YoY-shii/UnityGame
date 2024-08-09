@@ -13,8 +13,8 @@ public class Boss : MonoBehaviour, IDamageable, IStatus, IHaveScore
 
     //Cache
     Transform transformCamCache;
-    NavMeshAgent nav;
     Transform transformCache;
+    NavMeshAgent nav;
 
     //Property
     public int Hp { get; private set; }
@@ -26,11 +26,11 @@ public class Boss : MonoBehaviour, IDamageable, IStatus, IHaveScore
     private void Awake()
     {
         TryGetComponent(out nav);
-        transformCache = this.transform;
     }
 
     void Start()
     {
+        transformCache = this.transform;
         transformCamCache = Camera.main.transform;
         Hp = maxHp;
         IsAlive = true;
@@ -69,7 +69,7 @@ public class Boss : MonoBehaviour, IDamageable, IStatus, IHaveScore
 
     private void OnDestroy()
     {
-        scoreManager.GetScore(this);
+        scoreManager.GetScore(this,this);
         scoreManager.CheckAlive(this);
     }
 }

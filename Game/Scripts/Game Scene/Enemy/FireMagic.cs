@@ -29,7 +29,7 @@ public class FireMagic : MonoBehaviour
 
     private void FixedUpdate()
     {
-        var direction = Player.Instance.transform.position - transformCache.position;
+        var direction = Player.Instance.transform.localPosition - transformCache.localPosition;
         rb.AddForce(direction * effectSpeed * Time.deltaTime);
     }
 

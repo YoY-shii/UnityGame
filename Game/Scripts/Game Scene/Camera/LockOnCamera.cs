@@ -20,7 +20,7 @@ public class LockOnCamera : MonoBehaviour
     Vector3 rangeDistance = new (5, 5, 5);
     Vector3 closeRangeDistance = new (4, 4, 4);
 
-    void Start()
+    private void Awake()
     {
         if (ReferenceEquals(search, null))
         {
@@ -31,7 +31,10 @@ public class LockOnCamera : MonoBehaviour
         {
             detectObstacle = FindAnyObjectByType<DetectObstacle>();
         }
+    }
 
+    void Start()
+    {
         freeCVCam.enabled = true;
         lockOnCVCam.enabled = false;
     }

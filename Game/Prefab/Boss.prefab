@@ -317,7 +317,7 @@ GameObject:
   - component: {fileID: 1612961231528574459}
   - component: {fileID: 8961894028583989579}
   - component: {fileID: 976124569566102320}
-  - component: {fileID: 6126808853213222130}
+  - component: {fileID: 5528219108592318808}
   - component: {fileID: 290404381011830733}
   - component: {fileID: 4230571546025858907}
   m_Layer: 6
@@ -488,7 +488,7 @@ MonoBehaviour:
   referenceDistance: {fileID: 4230571546025858907}
   enemyUICanvas: {fileID: 5588842582641920388}
   hpSlider: {fileID: 137177079095647288}
---- !u!114 &6126808853213222130
+--- !u!114 &5528219108592318808
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -515,6 +515,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   referenceDistance: {fileID: 4230571546025858907}
+  <IsVisible>k__BackingField: 0
+  <IsObstacle>k__BackingField: 0
 --- !u!114 &4230571546025858907
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -527,6 +529,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3cefa5dc33617455288931cca2503dbd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  transformCache: {fileID: 0}
 --- !u!1 &7480718801270508638
 GameObject:
   m_ObjectHideFlags: 0

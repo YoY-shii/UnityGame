@@ -18,7 +18,7 @@ public class Search : MonoBehaviour
     /// <value>BombOrientationクラス、EstimateRangeクラス、およびLockOnCameraクラスへ</value>
     public GameObject SearchObj { get; private set; }
 
-    void Start()
+    private void Awake()
     {
         if (ReferenceEquals(enemyPool, null))
         {
@@ -29,7 +29,10 @@ public class Search : MonoBehaviour
         {
             detectObstacle = FindAnyObjectByType<DetectObstacle>();
         }
+    }
 
+    void Start()
+    {
         transformCache = this.transform;
     }
 

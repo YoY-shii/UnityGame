@@ -26,13 +26,12 @@ public class BombOrientation : MonoBehaviour
             bombPool = FindAnyObjectByType<BombPool>();
         }
 
-        mainCam = Camera.main;
+        TryGetComponent(out search);
+        TryGetComponent(out animator);
     }
 
     void Start()
     {
-        TryGetComponent(out search);
-        TryGetComponent(out animator);
         mainCam = Camera.main;
         transformCameraCache = mainCam.transform;
         transformCache = this.transform;

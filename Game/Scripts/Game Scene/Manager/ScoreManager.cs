@@ -11,8 +11,8 @@ public class ScoreManager : MonoBehaviour
     [SerializeField] TextMeshProUGUI resultText;
 
     int totalScore = 0;
-    int killedCount = 0;
-    int deathCount = 0;
+    public int killedCount = 0;
+    public int deathCount = 0;
     bool isAliveBoss = true;
     readonly int penaltyScore = 5000;
 
@@ -27,8 +27,7 @@ public class ScoreManager : MonoBehaviour
     /// </summary>
     public void CheckAlive(IStatus status)
     {
-        if (status == null) return;
-
+        //下記の二つのifはリスコフの置換原則に違反
         if (status is Player && !status.IsAlive)
         {
             deathCount++;
@@ -44,16 +43,13 @@ public class ScoreManager : MonoBehaviour
     /// <summary>
     ///Scoreを計算するメソッド
     /// </summary>
-    public void GetScore(IHaveScore score)
+    public void GetScore(IHaveScore score, IStatus status)
     {
-        if (score == null) return;
-
-        totalScore += score.Score;
-        killedCount++;
-
-        if (totalScore < 0)
+        //2体以上まとめて倒すとスコアとカウントがバグったのでIsAliveで判定後にカウントする方式に変更
+        if (!status.IsAlive)
         {
-            totalScore = 0;
+            totalScore += score.Score;
+            killedCount++;
         }
 
         totalScoreText.text = "Score " + totalScore.ToString();

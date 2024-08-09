@@ -12,6 +12,7 @@ public class Enemy : MonoBehaviour, IDamageable, IStatus, IHaveScore
 
     //Field
     Vector3 range = new (5, 5, 5);
+        [SerializeField] float distance;
     float terrainX = 40f;
     float terrainY = 0f;
     float terrainZ = 40f;
@@ -57,10 +58,7 @@ public class Enemy : MonoBehaviour, IDamageable, IStatus, IHaveScore
             Hp = maxHp;
         }
 
-        if (!IsAlive)
-        {
-            IsAlive = true;
-        }
+        IsAlive = true;
 
         nav.isStopped = false;
 
@@ -86,7 +84,6 @@ public class Enemy : MonoBehaviour, IDamageable, IStatus, IHaveScore
             {
                 nav.isStopped = true;
                 
-
                 int randomAttack = Random.Range(1, 4);
 
                 for (int i = 0; i < randomAttack; i++)
@@ -136,9 +133,7 @@ public class Enemy : MonoBehaviour, IDamageable, IStatus, IHaveScore
 
     private void OnDisable()
     {
-        Hp = maxHp;
-        IsAlive = true;
-        scoreManager.GetScore(this);
+        scoreManager.GetScore(this,this);
     }
 }
 
