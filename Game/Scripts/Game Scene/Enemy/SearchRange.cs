@@ -19,9 +19,9 @@ public class SearchRange : MonoBehaviour
     int LayerBackGround;
 
     //Property
-    [field:SerializeField] public bool IsVisible { get; private set; }
+    public bool IsVisible { get; private set; }
 
-    [field: SerializeField] public bool IsObstacle { get; private set; }
+    public bool IsObstacle { get; private set; }
 
     private void OnEnable()
     {

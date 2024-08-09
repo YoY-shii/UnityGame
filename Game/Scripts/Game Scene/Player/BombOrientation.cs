@@ -58,7 +58,7 @@ public class BombOrientation : MonoBehaviour
         //魔法の生成場所
         bombMagic.transform.position = currentPosition;
 
-        //発動した魔法の方向へプレイヤーを向ける　←PlayerのAttack()メソッドあたりに書きたい
+        //発動した魔法の方向へプレイヤーを向ける
         var orientMagic = Quaternion.LookRotation(bombMagic.transform.position - transformCache.position);
         orientMagic.x = 0;
         orientMagic.z = 0;

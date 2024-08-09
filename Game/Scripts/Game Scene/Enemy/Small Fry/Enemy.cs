@@ -6,13 +6,12 @@ using UnityEngine.AI;
 
 public class Enemy : MonoBehaviour, IDamageable, IStatus, IHaveScore
 {
-    [SerializeField] ScoreManager scoreManager;
+    CalcScore calcScore;
     [SerializeField] SearchRange searchRange;
     [SerializeField] ReferenceDistance referenceDistance;
 
     //Field
     Vector3 range = new (5, 5, 5);
-        [SerializeField] float distance;
     float terrainX = 40f;
     float terrainY = 0f;
     float terrainZ = 40f;
@@ -38,9 +37,9 @@ public class Enemy : MonoBehaviour, IDamageable, IStatus, IHaveScore
 
     private void Awake()
     {
-        if (ReferenceEquals(scoreManager, null))
+        if (ReferenceEquals(calcScore, null))
         {
-            scoreManager = FindAnyObjectByType<ScoreManager>();
+            calcScore = FindAnyObjectByType<CalcScore>();
         }
 
         TryGetComponent(out nav);
@@ -133,7 +132,7 @@ public class Enemy : MonoBehaviour, IDamageable, IStatus, IHaveScore
 
     private void OnDisable()
     {
-        scoreManager.GetScore(this,this);
+        calcScore.GetScore(this,this);
     }
 }
 

@@ -10,7 +10,7 @@ public class EnemyPool : MonoBehaviour
     ObjectPool<GameObject> pool;
 
     //Field
-    [SerializeField] GameObject[] targets = new GameObject[16];//Original設置
+    [SerializeField] GameObject[] targets = new GameObject[32];//Original設置
     [SerializeField] GameObject enemyPrefab;
     readonly float interval = 5f;
 
@@ -82,11 +82,3 @@ public class EnemyPool : MonoBehaviour
     void OnDestroyPoolObject(GameObject target) => Destroy(target);
 
 }
-
-//void GetM()
-//{
-//    var a = targets
-//        .Where(i => !i.activeSelf)
-//        .FirstOrDefault();
-//    a.SetActive(true);
-//}

@@ -4,12 +4,11 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 
-//Player.Instance ←検索用
 public class GameManager : MonoBehaviour
 {
     [SerializeField] FadeOutManager fadeOutManager;
     [SerializeField] AudioManager audioManager;
-    [SerializeField] ScoreManager scoreManager;
+    [SerializeField] DisplayResult displayResult;
 
     //Field
     [SerializeField] Canvas canvas;
@@ -36,14 +35,14 @@ public class GameManager : MonoBehaviour
             audioManager = FindAnyObjectByType<AudioManager>();
         }
 
-        if (ReferenceEquals(scoreManager, null))
+        if (ReferenceEquals(displayResult, null))
         {
-            scoreManager = FindAnyObjectByType<ScoreManager>();
+            displayResult = FindAnyObjectByType<DisplayResult>();
         }
 
         IsEndingText.enabled = false;
 
-        var gameTime = 3f;
+        var gameTime = 1f;
         const float MINUTES = 1f;
         const float SECONDS = 60f;
         timeLimit = gameTime * MINUTES * SECONDS; //180秒
@@ -78,7 +77,7 @@ public class GameManager : MonoBehaviour
 
                 fadeOutManager.enabled = true;
                 audioManager.enabled = true;
-                scoreManager.Invoke(nameof(scoreManager.EvaluateResultText), 3f);
+                displayResult.Invoke(nameof(displayResult.EvaluateResultText), 3f);
                 isCalledAllManager = true;
             }
         }

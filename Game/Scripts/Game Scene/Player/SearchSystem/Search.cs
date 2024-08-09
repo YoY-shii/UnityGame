@@ -8,7 +8,7 @@ public class Search : MonoBehaviour
     [SerializeField] DetectObstacle detectObstacle;
 
     //Field
-    [SerializeField] GameObject[] targets = new GameObject[16];
+    [SerializeField] GameObject[] targets = new GameObject[32];
     readonly float interval = 5f;
 
     //Cache
@@ -72,6 +72,4 @@ public class Search : MonoBehaviour
             }
         }
     }
-
-
 }

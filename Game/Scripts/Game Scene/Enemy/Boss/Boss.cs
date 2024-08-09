@@ -5,16 +5,18 @@ using UnityEngine.AI;
 
 public class Boss : MonoBehaviour, IDamageable, IStatus, IHaveScore
 {
-    [SerializeField] ScoreManager scoreManager;
+    [SerializeField] CalcScore calcScore;
 
     //Status
     [SerializeField] int maxHp;
     int damage = 5;
 
     //Cache
+    Animator animator;
     Transform transformCamCache;
     Transform transformCache;
     NavMeshAgent nav;
+    int isDeathCache;
 
     //Property
     public int Hp { get; private set; }
@@ -25,6 +27,12 @@ public class Boss : MonoBehaviour, IDamageable, IStatus, IHaveScore
 
     private void Awake()
     {
+        if (ReferenceEquals(calcScore, null))
+        {
+            calcScore = FindAnyObjectByType<CalcScore>();
+        }
+
+        TryGetComponent(out animator);
         TryGetComponent(out nav);
     }
 
@@ -32,6 +40,7 @@ public class Boss : MonoBehaviour, IDamageable, IStatus, IHaveScore
     {
         transformCache = this.transform;
         transformCamCache = Camera.main.transform;
+        isDeathCache = Animator.StringToHash("IsDeath");
         Hp = maxHp;
         IsAlive = true;
         Score = 5000;
@@ -53,7 +62,8 @@ public class Boss : MonoBehaviour, IDamageable, IStatus, IHaveScore
             Hp = 0;
             IsAlive = false;
             nav.isStopped = true;
-            Destroy(this.gameObject);
+            animator.SetTrigger(isDeathCache);
+            Invoke(nameof(DeathScene), 1f);
         }
     }
 
@@ -67,9 +77,14 @@ public class Boss : MonoBehaviour, IDamageable, IStatus, IHaveScore
         }
     }
 
+    void DeathScene()
+    {
+        Destroy(this.gameObject);
+    }
+
     private void OnDestroy()
     {
-        scoreManager.GetScore(this,this);
-        scoreManager.CheckAlive(this);
+        calcScore.GetScore(this,this);
+        calcScore.CheckAlive(this);
     }
 }

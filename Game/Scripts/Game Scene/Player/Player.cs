@@ -12,8 +12,8 @@ public class Player : MonoBehaviour, IInjurer, IStatus
 {
     public static Player Instance;
 
+    [SerializeField] CalcScore calcScore;
     [SerializeField] GameManager gameManager;
-    [SerializeField] ScoreManager scoreManager;
     [SerializeField] BombOrientation bombOrientation;
 
     //Field
@@ -48,9 +48,9 @@ public class Player : MonoBehaviour, IInjurer, IStatus
             gameManager = FindAnyObjectByType<GameManager>();
         }
 
-        if (ReferenceEquals(scoreManager, null))
+        if (ReferenceEquals(calcScore, null))
         {
-            scoreManager = FindAnyObjectByType<ScoreManager>();
+            calcScore = FindAnyObjectByType<CalcScore>();
         }
 
         TryGetComponent(out bombOrientation);
@@ -130,7 +130,7 @@ public class Player : MonoBehaviour, IInjurer, IStatus
         {
             Hp = 0;
             IsAlive = false;
-            scoreManager.CheckAlive(this);
+            calcScore.CheckAlive(this);
             animator.SetTrigger(isDeathCache);
             StartCoroutine(Revival());
         }
