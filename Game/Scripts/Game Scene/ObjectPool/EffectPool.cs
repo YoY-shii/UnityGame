@@ -23,7 +23,7 @@ public class EffectPool : MonoBehaviour
 
     void Start()
     {
-        var defaultMax = 8;
+        var defaultMax = 16;
 
         //poolにキャッシュ
         for (int i = 0; i < defaultMax; i++)
