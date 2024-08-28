@@ -85,28 +85,35 @@ public class Search : MonoBehaviour
     //    var distanceI = 0f;
     //    var distanceJ = 0f;
 
-    //    for (int i = left; i < right; i++)
+    //    while (left < right)
     //    {
-    //        distanceI = Vector3.SqrMagnitude(transformCache.position - targets[i].transform.position);
-    //        distanceJ = Vector3.SqrMagnitude(transformCache.position - targets[i + 1].transform.position);
-
-    //        if (distanceJ < distanceI)
+    //        for (int i = left; i < right; i++)
     //        {
-    //            //プレイヤーから最も近い敵をtarget[0]に寄せ、SearchObjに代入
-    //            (targets[i], targets[i + 1]) = (targets[i + 1], targets[i]);
+    //            distanceI = Vector3.SqrMagnitude(transformCache.position - targets[i].transform.position);
+    //            distanceJ = Vector3.SqrMagnitude(transformCache.position - targets[i + 1].transform.position);
+
+    //            if (distanceJ < distanceI)
+    //            {
+    //                //プレイヤーから最も近い敵をtarget[0]に寄せ、SearchObjに代入
+    //                (targets[i], targets[i + 1]) = (targets[i + 1], targets[i]);
+    //            }
     //        }
-    //    }
 
-    //    for (int i = right; i > left; i--)
-    //    {
-    //        distanceI = Vector3.SqrMagnitude(transformCache.position - targets[i].transform.position);
-    //        distanceJ = Vector3.SqrMagnitude(transformCache.position - targets[i - 1].transform.position);
+    //        right -= 1;
 
-    //        if (distanceI < distanceJ)
+    //        for (int i = right; i > left; i--)
     //        {
-    //            //プレイヤーから最も近い敵をtarget[0]に寄せ、SearchObjに代入
-    //            (targets[i], targets[i - 1]) = (targets[i - 1], targets[i]);
+    //            distanceI = Vector3.SqrMagnitude(transformCache.position - targets[i].transform.position);
+    //            distanceJ = Vector3.SqrMagnitude(transformCache.position - targets[i - 1].transform.position);
+
+    //            if (distanceI < distanceJ)
+    //            {
+    //                //プレイヤーから最も近い敵をtarget[0]に寄せ、SearchObjに代入
+    //                (targets[i], targets[i - 1]) = (targets[i - 1], targets[i]);
+    //            }
     //        }
+
+    //        left += 1;
     //    }
 
     //    SearchObj = targets[0];
