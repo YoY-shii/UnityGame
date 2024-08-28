@@ -8,7 +8,8 @@ public class Search : MonoBehaviour
     [SerializeField] DetectObstacle detectObstacle;
 
     //Field
-    [SerializeField] GameObject[] targets = new GameObject[32];
+    [SerializeField] GameObject[] targets;
+    int arrayNum = 16;
     readonly float interval = 5f;
 
     //Cache
@@ -34,6 +35,7 @@ public class Search : MonoBehaviour
     void Start()
     {
         transformCache = this.transform;
+        targets = new GameObject[arrayNum];
     }
 
     void Update()
@@ -41,6 +43,7 @@ public class Search : MonoBehaviour
         if (Time.frameCount % interval == 0f)
         {
             SearchforEnemies();
+            //Shaker();
             detectObstacle.JudgeObstacle(this);
         }
     }
@@ -72,4 +75,38 @@ public class Search : MonoBehaviour
             }
         }
     }
+
+    //void Shaker()
+    //{
+    //    targets = enemyPool.Targets;
+
+    //    var left = 0;
+    //    var right = arrayNum - 1;
+
+    //    for (int i = left; i < right; i++)
+    //    {
+    //        var distanceI = Vector3.SqrMagnitude(transformCache.position - targets[i].transform.position);
+    //        var distanceJ = Vector3.SqrMagnitude(transformCache.position - targets[i + 1].transform.position);
+
+    //        if (distanceI < distanceJ)
+    //        {
+    //            //プレイヤーから最も近い敵をtarget[0]に寄せ、SearchObjに代入
+    //            (targets[i + 1], targets[i]) = (targets[i], targets[i + 1]);
+    //        }
+    //    }
+
+    //    for (int i = right; i > left; i--)
+    //    {
+    //        var distanceI = Vector3.SqrMagnitude(transformCache.position - targets[i].transform.position);
+    //        var distanceJ = Vector3.SqrMagnitude(transformCache.position - targets[i - 1].transform.position);
+
+    //        if (distanceI < distanceJ)
+    //        {
+    //            //プレイヤーから最も近い敵をtarget[0]に寄せ、SearchObjに代入
+    //            (targets[i], targets[i - 1]) = (targets[i - 1], targets[i]);
+    //        }
+    //    }
+
+    //    SearchObj = targets[0];
+    //}
 }

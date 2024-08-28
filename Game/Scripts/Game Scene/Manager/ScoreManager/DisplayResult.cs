@@ -8,6 +8,7 @@ using UnityEngine.SceneManagement;
 public class DisplayResult : MonoBehaviour
 {
     [SerializeField] CalcScore calcScore;
+    [SerializeField] Boss boss;
 
     //Field
     [SerializeField] TextMeshProUGUI resultText;
@@ -29,12 +30,12 @@ public class DisplayResult : MonoBehaviour
         var title = "称号:";
         var name = "";
 
-        if (Player.Instance.Hp == 100 && calcScore.DeathCount == 0 && !calcScore.isAliveBoss)
+        if (Player.Instance.Hp == 100 && calcScore.DeathCount == 0 && !boss.IsAlive)
         {
             name = "暇神";
         }
 
-        else if (!calcScore.isAliveBoss)
+        else if (!boss.IsAlive)
         {
             name = "ボスキラー";
         }
@@ -55,7 +56,7 @@ public class DisplayResult : MonoBehaviour
             $"\n{score}{calcScore.ResultScore()}" +
             $"\n{title}{name}";
 
-        Invoke(nameof(ReturnStartScene), 3f);
+        Invoke(nameof(ReturnStartScene), 5f);
     }
 
     void ReturnStartScene() => SceneManager.LoadScene("Start Scene");
