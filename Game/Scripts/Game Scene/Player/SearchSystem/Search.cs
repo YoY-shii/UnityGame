@@ -44,6 +44,7 @@ public class Search : MonoBehaviour
         {
             SearchforEnemies();
             //Shaker();
+            //InsertSort();
             detectObstacle.JudgeObstacle(this);
         }
     }
@@ -117,5 +118,33 @@ public class Search : MonoBehaviour
     //    }
 
     //    SearchObj = targets[0];
+    //}
+
+    //void InsertSort()
+    //{
+    //    targets = enemyPool.Targets;
+    //    var distanceI = 0f;
+    //    var distanceJ = 0f;
+
+    //    for (int i = 1; i < targets.Length; i++)
+    //    {
+    //        var temp = targets[i];
+
+    //        distanceI = Vector3.SqrMagnitude(transformCache.position - targets[i].transform.position);
+    //        distanceJ = Vector3.SqrMagnitude(transformCache.position - targets[i - 1].transform.position);
+
+    //        if (0 < distanceJ - distanceI)
+    //        {
+    //            var j = i;
+
+    //            do
+    //            {
+    //                targets[j] = targets[j - 1];
+    //                j--;
+    //            } while (0 < j && 0 < distanceJ - distanceI);
+
+    //            SearchObj = targets[j] = temp;
+    //        }
+    //    }
     //}
 }
