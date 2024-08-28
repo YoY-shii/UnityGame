@@ -82,23 +82,25 @@ public class Search : MonoBehaviour
 
     //    var left = 0;
     //    var right = arrayNum - 1;
+    //    var distanceI = 0f;
+    //    var distanceJ = 0f;
 
     //    for (int i = left; i < right; i++)
     //    {
-    //        var distanceI = Vector3.SqrMagnitude(transformCache.position - targets[i].transform.position);
-    //        var distanceJ = Vector3.SqrMagnitude(transformCache.position - targets[i + 1].transform.position);
+    //        distanceI = Vector3.SqrMagnitude(transformCache.position - targets[i].transform.position);
+    //        distanceJ = Vector3.SqrMagnitude(transformCache.position - targets[i + 1].transform.position);
 
-    //        if (distanceI < distanceJ)
+    //        if (distanceJ < distanceI)
     //        {
     //            //プレイヤーから最も近い敵をtarget[0]に寄せ、SearchObjに代入
-    //            (targets[i + 1], targets[i]) = (targets[i], targets[i + 1]);
+    //            (targets[i], targets[i + 1]) = (targets[i + 1], targets[i]);
     //        }
     //    }
 
     //    for (int i = right; i > left; i--)
     //    {
-    //        var distanceI = Vector3.SqrMagnitude(transformCache.position - targets[i].transform.position);
-    //        var distanceJ = Vector3.SqrMagnitude(transformCache.position - targets[i - 1].transform.position);
+    //        distanceI = Vector3.SqrMagnitude(transformCache.position - targets[i].transform.position);
+    //        distanceJ = Vector3.SqrMagnitude(transformCache.position - targets[i - 1].transform.position);
 
     //        if (distanceI < distanceJ)
     //        {
