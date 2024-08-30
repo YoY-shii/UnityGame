@@ -8,8 +8,7 @@ public class Search : MonoBehaviour
     [SerializeField] DetectObstacle detectObstacle;
 
     //Field
-    [SerializeField] GameObject[] targets;
-    int arrayNum = 16;
+    [SerializeField] GameObject[] targets = new GameObject[16];
     readonly float interval = 5f;
 
     //Cache
@@ -35,15 +34,13 @@ public class Search : MonoBehaviour
     void Start()
     {
         transformCache = this.transform;
-        targets = new GameObject[arrayNum];
     }
 
     void Update()
     {
         if (Time.frameCount % interval == 0f)
         {
-            SearchforEnemies();
-            //InsertSort();
+            InsertionSort();
             detectObstacle.JudgeObstacle(this);
         }
     }
@@ -51,58 +48,29 @@ public class Search : MonoBehaviour
     /// <summary>
     ///最も近い敵を索敵
     /// </summary>
-    void SearchforEnemies()
+    void InsertionSort()
     {
-        //直接書き込むのは冗長的になるのとinspectorで確認できるようにtargetsへ代入
         targets = enemyPool.Targets;
         var distanceI = 0f;
         var distanceJ = 0f;
 
-        //バブルソートで記述
-        for (int i = 0; i < targets.Length; i++)
+        for (int i = 1; i < targets.Length; i++)
         {
-            if (ReferenceEquals(targets[i], null)) return;
+            distanceI = Vector3.SqrMagnitude(transformCache.position - targets[i].transform.position);
+            distanceJ = Vector3.SqrMagnitude(transformCache.position - targets[i - 1].transform.position);
 
-            for (int j = 0; j < targets.Length; j++)
+            if (distanceI < distanceJ)
             {
-                distanceI = Vector3.SqrMagnitude(transformCache.position - targets[i].transform.position);
-                distanceJ = Vector3.SqrMagnitude(transformCache.position - targets[j].transform.position);
+                var j = i;
 
-                if (distanceI < distanceJ)
+                while (0 < j && distanceI < distanceJ)
                 {
-                    //プレイヤーから最も近い敵をtarget[0]に寄せ、SearchObjに代入
-                    (targets[j], targets[i]) = (targets[i], targets[j]);
-                    SearchObj = targets[0];
+                    (targets[j], targets[j - 1]) = (targets[j - 1], targets[j]);
+                    j--;
                 }
+
+                SearchObj = targets[j];
             }
         }
     }
-
-    //void InsertionSort()
-    //{
-    //    targets = enemyPool.Targets;
-    //    var distanceI = 0f;
-    //    var distanceJ = 0f;
-
-    //    for (int i = 1; i < targets.Length; i++)
-    //    {
-    //        var temp = targets[i];
-
-    //        distanceI = Vector3.SqrMagnitude(transformCache.position - targets[i].transform.position);
-    //        distanceJ = Vector3.SqrMagnitude(transformCache.position - targets[i - 1].transform.position);
-
-    //        if (0 < distanceJ - distanceI)
-    //        {
-    //            var j = i;
-
-    //            while (0 < j && distanceI < distanceJ) 
-    //            {
-    //                targets[j] = targets[j - 1];
-    //                j--;
-    //            } 
-
-    //            SearchObj = targets[j] = temp;
-    //        }
-    //    }
-    //}
 }
